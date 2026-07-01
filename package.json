@@ -1,0 +1,19 @@
+{
+  "name": "portfoli-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfoli marketing site with a lead-capture backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.14"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
