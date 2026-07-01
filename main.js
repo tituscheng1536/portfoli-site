@@ -71,27 +71,6 @@
   });
 })();
 
-// Live parameter panel chart cycling
-(() => {
-  const line = document.getElementById('recal-line');
-  const dot = document.getElementById('recal-dot');
-  if (!line || !dot) return;
-
-  const paths = [
-    "0,110 30,95 60,100 90,70 120,80 150,50 180,60 210,35 240,45 270,20 300,28",
-    "0,105 30,110 60,85 90,90 120,60 150,68 180,40 210,50 240,25 270,32 300,15",
-    "0,115 30,98 60,102 90,78 120,55 150,62 180,48 210,30 240,38 270,22 300,10",
-  ];
-  let i = 0;
-  setInterval(() => {
-    i = (i + 1) % paths.length;
-    line.setAttribute('points', paths[i]);
-    const last = paths[i].split(' ').pop().split(',');
-    dot.setAttribute('cx', last[0]);
-    dot.setAttribute('cy', last[1]);
-  }, 3200);
-})();
-
 // Scroll-reveal for section content
 (() => {
   const targets = document.querySelectorAll('.reveal');
