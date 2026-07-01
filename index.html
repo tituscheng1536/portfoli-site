@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfoli — Adaptive Quantitative Trading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --paper:#F6F5F0;
+    --ink:#17181A;
+    --steel:#83878C;
+    --steel-light:#D8D9D6;
+    --steel-lighter:#EDEDEB;
+    --gold:#AC8A45;
+    --gold-deep:#8A6B2E;
+    --gold-tint:#F2EAD6;
+    --serif: 'Fraunces', serif;
+    --sans: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--sans); color:var(--ink); background:var(--white); line-height:1.6; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 40px;}
+  a{color:inherit; text-decoration:none;}
+  .eyebrow{font-family:var(--mono); font-size:11.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-deep);}
+  .hairline{border:none; border-top:1px solid var(--steel-light); margin:0;}
+
+  /* NAV */
+  nav{display:flex; align-items:center; justify-content:space-between; padding:26px 40px; border-bottom:1px solid var(--steel-light);}
+  .logo{font-family:var(--serif); font-weight:600; font-size:20px; letter-spacing:0.02em;}
+  .logo span{color:var(--gold);}
+  .navlinks{display:flex; gap:36px; font-size:14.5px; color:var(--ink);}
+  .navlinks a{padding:6px 0; border-bottom:1px solid transparent; transition:border-color .15s;}
+  .navlinks a:hover{border-color:var(--gold);}
+  .navcta{font-size:13.5px; padding:10px 20px; border:1px solid var(--ink); border-radius:2px; transition:background .15s,color .15s;}
+  .navcta:hover{background:var(--ink); color:var(--white);}
+
+  /* HERO */
+  .hero{display:grid; grid-template-columns:1.15fr 0.85fr; gap:64px; padding:88px 40px 96px; align-items:start;}
+  .hero h1{font-family:var(--serif); font-weight:450; font-size:52px; line-height:1.08; letter-spacing:-0.01em; margin:18px 0 22px; color:var(--ink);}
+  .hero h1 em{font-style:italic; color:var(--gold-deep);}
+  .hero p.sub{font-size:17px; color:var(--steel); max-width:480px; margin-bottom:34px;}
+  .cta-row{display:flex; gap:14px; margin-bottom:56px;}
+  .btn-primary{background:var(--ink); color:var(--white); font-size:14.5px; padding:14px 26px; border-radius:2px; border:1px solid var(--ink); transition:opacity .15s;}
+  .btn-primary:hover{opacity:0.82;}
+  .btn-secondary{background:transparent; color:var(--ink); font-size:14.5px; padding:14px 26px; border-radius:2px; border:1px solid var(--steel-light); transition:border-color .15s;}
+  .btn-secondary:hover{border-color:var(--gold);}
+
+  .ledger{border-top:1px solid var(--steel-light);}
+  .ledger-row{display:flex; justify-content:space-between; align-items:baseline; padding:14px 0; border-bottom:1px solid var(--steel-light);}
+  .ledger-row .l-label{font-size:13px; color:var(--steel);}
+  .ledger-row .l-value{font-family:var(--mono); font-size:15px; color:var(--ink);}
+
+  /* SIGNATURE PANEL */
+  .panel{background:var(--paper); border:1px solid var(--steel-light); padding:28px 24px 22px; border-radius:2px;}
+  .panel-label{font-family:var(--mono); font-size:11px; color:var(--steel); letter-spacing:0.06em; display:flex; justify-content:space-between; margin-bottom:16px;}
+  .panel-label .dot{width:6px; height:6px; border-radius:50%; background:var(--gold); display:inline-block; margin-right:6px; animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.25;}}
+  .panel svg{width:100%; height:auto; display:block;}
+  .panel-caption{font-size:12px; color:var(--steel); margin-top:14px; line-height:1.5;}
+
+  section{padding:88px 40px;}
+  section.alt{background:var(--paper);}
+  .section-head{max-width:640px; margin-bottom:52px;}
+  .section-head .eyebrow{margin-bottom:12px;}
+  .section-head h2{font-family:var(--serif); font-weight:450; font-size:34px; letter-spacing:-0.005em; margin-bottom:14px;}
+  .section-head p{color:var(--steel); font-size:15.5px; max-width:560px;}
+
+  /* PROCESS LOOP */
+  .loop{display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative;}
+  .loop::before{content:""; position:absolute; top:11px; left:6%; right:6%; height:1px; background:var(--steel-light);}
+  .loop-step{position:relative; padding-top:36px;}
+  .loop-step .num{font-family:var(--mono); font-size:12px; color:var(--gold-deep); background:var(--white); position:absolute; top:0; left:0; padding-right:10px;}
+  .loop-step .dot{position:absolute; top:6px; left:0; width:11px; height:11px; border-radius:50%; border:2px solid var(--gold); background:var(--white);}
+  .loop-step h3{font-family:var(--sans); font-weight:600; font-size:15px; margin-bottom:8px;}
+  .loop-step p{font-size:13.5px; color:var(--steel); line-height:1.6;}
+
+  /* STRATEGY ROWS */
+  .strategy{display:grid; grid-template-columns:170px 150px 1fr; gap:28px; align-items:baseline; padding:26px 0; border-bottom:1px solid var(--steel-light);}
+  .strategy:first-child{border-top:1px solid var(--steel-light);}
+  .strategy .ticker{font-family:var(--mono); font-size:19px; color:var(--ink);}
+  .strategy .ticker::before{content:"$"; color:var(--steel);}
+  .tag{display:inline-block; font-family:var(--mono); font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; background:var(--gold-tint); color:var(--gold-deep); padding:5px 10px; border-radius:2px; width:fit-content;}
+  .strategy p{font-size:14.5px; color:var(--steel); line-height:1.65;}
+
+  /* USE CASES */
+  .cases{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--steel-light); border:1px solid var(--steel-light);}
+  .case{background:var(--white); padding:32px 28px;}
+  .case .eyebrow{margin-bottom:14px;}
+  .case h3{font-family:var(--serif); font-weight:450; font-size:20px; margin-bottom:12px;}
+  .case p{font-size:14px; color:var(--steel); line-height:1.65;}
+
+  /* TRACK RECORD */
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--steel-light); border-bottom:1px solid var(--steel-light); margin-bottom:22px;}
+  .stat{padding:22px 24px; border-left:1px solid var(--steel-light);}
+  .stat:first-child{border-left:none;}
+  .stat .l-label{font-size:12px; color:var(--steel); margin-bottom:8px; display:block;}
+  .stat .l-value{font-family:var(--mono); font-size:26px; color:var(--ink);}
+  .disclosure{font-size:12px; color:var(--steel); font-style:italic; max-width:760px; line-height:1.7;}
+
+  /* PRICING */
+  .pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .plan{border:1px solid var(--steel-light); padding:32px 26px; border-radius:2px; background:var(--white);}
+  .plan.featured{border:2px solid var(--gold); position:relative;}
+  .plan .badge{position:absolute; top:-13px; left:26px; background:var(--gold); color:var(--white); font-size:11px; padding:4px 12px; border-radius:2px; font-family:var(--mono);}
+  .plan h3{font-family:var(--serif); font-weight:450; font-size:22px; margin-bottom:6px;}
+  .plan .price{font-family:var(--mono); font-size:15px; color:var(--steel); margin-bottom:20px;}
+  .plan ul{list-style:none; margin-bottom:26px;}
+  .plan li{font-size:13.5px; color:var(--steel); padding:8px 0; border-bottom:1px solid var(--steel-lighter); padding-left:16px; position:relative;}
+  .plan li::before{content:"—"; position:absolute; left:0; color:var(--gold);}
+  .plan .btn-secondary, .plan .btn-primary{display:block; text-align:center; width:100%;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  .mission-quote{font-family:var(--serif); font-weight:450; font-size:24px; line-height:1.5; color:var(--ink);}
+  .mission-quote .mark{color:var(--gold);}
+  .beliefs{list-style:none;}
+  .beliefs li{padding:14px 0 14px 22px; border-bottom:1px solid var(--steel-light); font-size:14px; color:var(--steel); position:relative; line-height:1.65;}
+  .beliefs li::before{content:"—"; position:absolute; left:0; color:var(--gold);}
+  .beliefs li strong{color:var(--ink); font-weight:600;}
+
+  .team{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:56px;}
+  .member{border:1px solid var(--steel-light); padding:24px; text-align:center;}
+  .avatar{width:56px; height:56px; border-radius:50%; background:var(--paper); border:1px solid var(--steel-light); margin:0 auto 14px;}
+  .member h4{font-size:14.5px; font-weight:600; margin-bottom:4px;}
+  .member .role{font-family:var(--mono); font-size:11px; color:var(--gold-deep); margin-bottom:10px;}
+  .member p{font-size:12.5px; color:var(--steel); line-height:1.6;}
+
+  /* FAQ */
+  details{border-bottom:1px solid var(--steel-light); padding:20px 0;}
+  summary{cursor:pointer; font-size:15.5px; font-weight:500; display:flex; justify-content:space-between; align-items:center; list-style:none;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+"; font-family:var(--mono); color:var(--gold); font-size:18px;}
+  details[open] summary::after{content:"–";}
+  details p{font-size:14px; color:var(--steel); margin-top:14px; line-height:1.7; max-width:680px;}
+
+  /* FOOTER CTA */
+  .final-cta{background:var(--ink); color:var(--white); padding:96px 40px; text-align:left;}
+  .final-cta h2{font-family:var(--serif); font-weight:450; font-size:36px; max-width:560px; margin-bottom:22px; line-height:1.25;}
+  .final-cta .btn-primary{background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:500;}
+
+  footer{background:var(--ink); color:var(--steel-light); padding:56px 40px 34px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:32px; padding-bottom:36px; border-bottom:1px solid #33343a;}
+  .foot-col h5{font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--steel); margin-bottom:14px;}
+  .foot-col a{display:block; font-size:13.5px; color:var(--steel-light); padding:5px 0;}
+  .foot-legal{font-size:11.5px; color:var(--steel); padding-top:22px; line-height:1.7;}
+
+  @media (max-width:860px){
+    .hero, .about-grid{grid-template-columns:1fr;}
+    .loop, .cases, .stats, .pricing, .team, .foot-grid{grid-template-columns:1fr;}
+    .strategy{grid-template-columns:1fr;}
+    nav{flex-wrap:wrap; gap:16px;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">PORTFOLI<span>.</span></div>
+  <div class="navlinks">
+    <a href="#usecases">Use cases</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#about">About</a>
+  </div>
+  <a href="#" class="navcta">Request access</a>
+</nav>
+
+<section class="hero" style="padding-top:88px;">
+  <div>
+    <div class="eyebrow">AI-native quantitative trading</div>
+    <h1>Trading strategies that <em>adapt</em> as fast as the markets do.</h1>
+    <p class="sub">Portfoli retrains its algorithmic strategies every month with an AI-assisted optimization engine — so your execution logic evolves with market conditions instead of decaying with them.</p>
+    <div class="cta-row">
+      <a href="#" class="btn-primary">Request access</a>
+      <a href="#platform" class="btn-secondary">See how it works</a>
+    </div>
+    <div class="ledger">
+      <div class="ledger-row"><span class="l-label">Proprietary strategies</span><span class="l-value">03</span></div>
+      <div class="ledger-row"><span class="l-label">Platforms supported</span><span class="l-value">MT5 · NinjaTrader</span></div>
+      <div class="ledger-row"><span class="l-label">Retraining cycle</span><span class="l-value">Monthly, automated</span></div>
+      <div class="ledger-row"><span class="l-label">Execution</span><span class="l-value">Long &amp; short, all strategies</span></div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-label"><span><span class="dot"></span>LIVE PARAMETER STATE</span><span>GOLD / XAU</span></div>
+    <svg viewBox="0 0 300 150" id="recal-svg">
+      <line x1="0" y1="30" x2="300" y2="30" stroke="#EDEDEB" stroke-width="1"/>
+      <line x1="0" y1="75" x2="300" y2="75" stroke="#EDEDEB" stroke-width="1"/>
+      <line x1="0" y1="120" x2="300" y2="120" stroke="#EDEDEB" stroke-width="1"/>
+      <polyline id="recal-line" points="0,110 30,95 60,100 90,70 120,80 150,50 180,60 210,35 240,45 270,20 300,28" fill="none" stroke="#83878C" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle id="recal-dot" cx="300" cy="28" r="4" fill="#AC8A45"/>
+    </svg>
+    <div class="panel-caption">Parameters are re-optimized on a monthly cycle. This trace represents how a strategy's live parameter path shifts as the engine recalibrates to current conditions.</div>
+  </div>
+</section>
+
+<section class="alt" id="platform">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How it works</div>
+      <h2>A closed loop between the market and the model.</h2>
+      <p>Most systems are built once and left to decay. Portfoli's optimization engine keeps re-evaluating strategy parameters against current market behavior, closing the loop every month instead of leaving it open indefinitely.</p>
+    </div>
+    <div class="loop">
+      <div class="loop-step"><span class="num">01</span><span class="dot"></span><h3>Deploy</h3><p>Strategies run live on MT5 and NinjaTrader with full long and short execution.</p></div>
+      <div class="loop-step"><span class="num">02</span><span class="dot"></span><h3>Monitor</h3><p>Performance and market regime data are logged continuously across all live strategies.</p></div>
+      <div class="loop-step"><span class="num">03</span><span class="dot"></span><h3>Retrain</h3><p>The AI engine searches for robust, non-overfit parameter sets based on recent conditions.</p></div>
+      <div class="loop-step"><span class="num">04</span><span class="dot"></span><h3>Redeploy</h3><p>Updated parameters are pushed live, and the loop begins again the following month.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The strategy suite</div>
+      <h2>Three strategies. One optimization engine.</h2>
+      <p>Trend-following and mean-reversion logic combined, so the portfolio isn't dependent on a single kind of market condition.</p>
+    </div>
+    <div class="strategy">
+      <span class="ticker">BDT</span>
+      <span class="tag">Momentum</span>
+      <p>Identifies and rides directional price moves once they gain confirmed strength — entering with the trend and managing exits as momentum fades.</p>
+    </div>
+    <div class="strategy">
+      <span class="ticker">CMR1</span>
+      <span class="tag">Mean reversion</span>
+      <p>Identifies range-bound, low-volatility conditions and trades the reversion back toward equilibrium after price extends beyond its typical range.</p>
+    </div>
+    <div class="strategy">
+      <span class="ticker">MORPHEUS</span>
+      <span class="tag">Trend-following</span>
+      <p>Captures sustained directional moves over longer horizons, using adaptive parameters to stay in a trend and reduce exposure once it breaks down.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="usecases">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Use cases</div>
+      <h2>Built for three kinds of desks.</h2>
+    </div>
+    <div class="cases">
+      <div class="case">
+        <div class="eyebrow">Retail</div>
+        <h3>Individual traders</h3>
+        <p>License a working, professionally built strategy suite instead of building one from scratch. Deploy directly on MT5 or NinjaTrader with monthly updates handled automatically.</p>
+      </div>
+      <div class="case">
+        <div class="eyebrow">Prop &amp; groups</div>
+        <h3>Trading desks</h3>
+        <p>Standardize execution across a desk with strategies that are systematically retrained rather than manually re-optimized — reducing drift and discretionary risk.</p>
+      </div>
+      <div class="case">
+        <div class="eyebrow">Institutional</div>
+        <h3>Partners &amp; licensors</h3>
+        <p>Evaluate Portfoli's optimization engine and strategy suite for licensing, white-label deployment, or integration into a broader multi-strategy platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Track record</div>
+      <h2>Where the edge shows up today.</h2>
+      <p>Current profitability is concentrated in gold and silver, while AI training actively expands into additional futures, commodities, and currency markets.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="l-label">Net return</span><span class="l-value">—</span></div>
+      <div class="stat"><span class="l-label">Max drawdown</span><span class="l-value">—</span></div>
+      <div class="stat"><span class="l-label">Win rate</span><span class="l-value">—</span></div>
+      <div class="stat"><span class="l-label">Sharpe ratio</span><span class="l-value">—</span></div>
+    </div>
+    <p class="disclosure">Figures above are placeholders pending verified, published performance data. Past performance is not necessarily indicative of future results. Trading futures, forex, and CFDs involves substantial risk of loss and is not suitable for all investors. This content is informational only and does not constitute financial or trading advice.</p>
+  </div>
+</section>
+
+<section class="alt" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pricing</div>
+      <h2>Licensing built to scale to 3,000 traders.</h2>
+    </div>
+    <div class="pricing">
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">Single strategy / one platform</div>
+        <ul>
+          <li>One of BDT, CMR1, or Morpheus</li>
+          <li>MT5 or NinjaTrader</li>
+          <li>Monthly parameter updates</li>
+          <li>Standard support</li>
+        </ul>
+        <a href="#" class="btn-secondary">Get started</a>
+      </div>
+      <div class="plan featured">
+        <span class="badge">Most popular</span>
+        <h3>Full suite</h3>
+        <div class="price">All strategies / both platforms</div>
+        <ul>
+          <li>BDT, CMR1, and Morpheus</li>
+          <li>MT5 and NinjaTrader</li>
+          <li>Priority parameter delivery</li>
+          <li>Direct access to updates log</li>
+        </ul>
+        <a href="#" class="btn-primary">Request access</a>
+      </div>
+      <div class="plan">
+        <h3>Institutional</h3>
+        <div class="price">Custom deployment</div>
+        <ul>
+          <li>White-label or bespoke build</li>
+          <li>Dedicated onboarding</li>
+          <li>Custom asset-class expansion</li>
+          <li>Direct line to the optimization team</li>
+        </ul>
+        <a href="#" class="btn-secondary">Talk to us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">About</div>
+      <h2>Our mission</h2>
+    </div>
+    <div class="about-grid">
+      <p class="mission-quote"><span class="mark">“</span>Portfoli exists to close the gap between how fast markets change and how slowly most trading systems adapt — making AI-driven, adaptive trading infrastructure accessible beyond the few firms that can build it in-house.<span class="mark">”</span></p>
+      <ul class="beliefs">
+        <li><strong>Markets change; strategies should too.</strong> Static parameters are a liability, not a feature.</li>
+        <li><strong>Robustness over curve-fitting.</strong> Every retraining cycle surfaces parameters that generalize, not ones that just maximize a backtest.</li>
+        <li><strong>Transparency builds trust.</strong> We show our track record and our limitations, not just our best months.</li>
+        <li><strong>Discipline beats discretion.</strong> Our systems remove emotional decision-making from execution.</li>
+      </ul>
+    </div>
+    <div class="team">
+      <div class="member"><div class="avatar"></div><h4>[Name]</h4><div class="role">[Title]</div><p>Background, prior firm, and what they own at Portfoli.</p></div>
+      <div class="member"><div class="avatar"></div><h4>[Name]</h4><div class="role">[Title]</div><p>Background, prior firm, and what they own at Portfoli.</p></div>
+      <div class="member"><div class="avatar"></div><h4>[Name]</h4><div class="role">[Title]</div><p>Background, prior firm, and what they own at Portfoli.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Common questions</div>
+      <h2>FAQ</h2>
+    </div>
+    <details open>
+      <summary>What is Portfoli?</summary>
+      <p>An AI-native quantitative trading platform running proprietary algorithmic strategies on MT5 and NinjaTrader, with parameters retrained monthly by an AI-assisted optimization engine.</p>
+    </details>
+    <details>
+      <summary>What platforms does Portfoli support?</summary>
+      <p>MetaTrader 5 (MT5) and NinjaTrader.</p>
+    </details>
+    <details>
+      <summary>How often are strategies updated?</summary>
+      <p>Parameters are retrained on a monthly cycle, searching for robust parameter sets based on recent market behavior.</p>
+    </details>
+    <details>
+      <summary>What markets does Portfoli trade?</summary>
+      <p>Current profitability is concentrated in gold and silver, with active expansion into additional futures, commodities, and currency markets.</p>
+    </details>
+    <details>
+      <summary>Do you offer institutional licensing?</summary>
+      <p>Yes — we're actively pursuing institutional licensing, strategic partnerships, and acquisition conversations.</p>
+    </details>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Adaptive infrastructure for traders who don't want to trade like it's 2015.</h2>
+    <a href="#" class="btn-primary">Request access</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="logo" style="color:#fff;">PORTFOLI<span>.</span></div>
+      </div>
+      <div class="foot-col">
+        <h5>Product</h5>
+        <a href="#usecases">Use cases</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Track record</a>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#about">About</a>
+        <a href="#">Team</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <a href="#">Risk disclosure</a>
+        <a href="#">Terms of service</a>
+        <a href="#">Privacy policy</a>
+      </div>
+    </div>
+    <p class="foot-legal">Portfoli provides trading strategy licensing and technology. Nothing on this site constitutes financial advice. Trading involves risk of loss, including loss of principal.</p>
+  </div>
+</footer>
+
+<script>
+  const line = document.getElementById('recal-line');
+  const dot = document.getElementById('recal-dot');
+  const paths = [
+    "0,110 30,95 60,100 90,70 120,80 150,50 180,60 210,35 240,45 270,20 300,28",
+    "0,105 30,110 60,85 90,90 120,60 150,68 180,40 210,50 240,25 270,32 300,15",
+    "0,115 30,98 60,102 90,78 120,55 150,62 180,48 210,30 240,38 270,22 300,10",
+  ];
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % paths.length;
+    line.setAttribute('points', paths[i]);
+    const last = paths[i].split(' ').pop().split(',');
+    dot.setAttribute('cx', last[0]);
+    dot.setAttribute('cy', last[1]);
+  }, 3200);
+</script>
+
+</body>
+</html>
