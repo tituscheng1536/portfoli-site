@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfoli — Building the Future of Adaptive Trading</title>
+<meta name="description" content="Portfoli is building adaptive trading infrastructure for forex — gold and silver — combining trend and mean-reversion strategies with an AI-assisted optimization engine. Currently in private beta.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Portfoli — Building the Future of Adaptive Trading">
+<meta property="og:description" content="Adaptive forex trading infrastructure for gold and silver. Trend + mean-reversion strategies, AI-assisted optimization. In private beta.">
+<meta property="og:site_name" content="Portfoli">
+<!-- TODO: set og:url to the live domain once deployed, and og:image to a 1200x630 social share image -->
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Portfoli — Building the Future of Adaptive Trading">
+<meta name="twitter:description" content="Adaptive forex trading infrastructure for gold and silver. Trend + mean-reversion strategies, AI-assisted optimization. In private beta.">
+<meta name="twitter:site" content="@portfoli.tech">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --paper:#F6F5F0;
+    --ink:#17181A;
+    --steel:#83878C;
+    --steel-light:#D8D9D6;
+    --steel-lighter:#EDEDEB;
+    --gold:#AC8A45;
+    --gold-deep:#8A6B2E;
+    --gold-tint:#F2EAD6;
+    --sans: 'Inter', sans-serif;
+    --display: 'Fraunces', serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{min-height:100%;}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    min-height:100vh;
+    padding:40px;
+    position:relative;
+  }
+
+  /* subtle background texture */
+  body::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background-image:
+      linear-gradient(var(--steel-lighter) 1px, transparent 1px),
+      linear-gradient(90deg, var(--steel-lighter) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.4;
+    mask-image:radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image:radial-gradient(ellipse at center, black 0%, transparent 70%);
+  }
+
+  .card{
+    position:relative;
+    z-index:1;
+    max-width:620px;
+    width:100%;
+    text-align:center;
+    background:var(--paper);
+    border:1px solid var(--steel-light);
+    padding:56px 48px;
+    box-shadow:0 32px 64px -32px rgba(23,24,26,0.16);
+  }
+
+  .logo-mark{
+    font-family:var(--sans);
+    font-weight:600;
+    font-size:15px;
+    letter-spacing:0.12em;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--gold-deep);
+    margin-bottom:24px;
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:450;
+    font-size:40px;
+    line-height:1.2;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  h1 .dots{
+    display:inline-block;
+    color:var(--gold);
+    animation:blink 1.6s infinite;
+  }
+  @keyframes blink{
+    0%,20%{opacity:1;}
+    50%{opacity:0.25;}
+    80%,100%{opacity:1;}
+  }
+
+  .mission{
+    font-size:16px;
+    color:var(--steel);
+    max-width:480px;
+    margin:24px auto 40px;
+    line-height:1.75;
+  }
+
+  .hairline{
+    width:48px;
+    height:1px;
+    background:var(--gold);
+    margin:0 auto 40px;
+  }
+
+  .facts{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    background:var(--steel-light);
+    border:1px solid var(--steel-light);
+    margin-bottom:40px;
+    text-align:left;
+  }
+  .fact{
+    background:var(--white);
+    padding:16px 20px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .fact.highlight{
+    background:var(--gold-tint);
+  }
+  .fact .l-label{
+    flex-shrink:0;
+    white-space:nowrap;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--steel);
+  }
+  .fact .l-value{
+    font-size:14px;
+    color:var(--ink);
+    text-align:right;
+  }
+  .fact .l-value.mono{
+    font-family:var(--mono);
+    font-size:13px;
+  }
+
+  .closing{
+    font-size:14px;
+    color:var(--steel);
+    margin-bottom:36px;
+  }
+
+  .cta-row{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:44px;
+  }
+  input[type="email"]{
+    font-family:var(--sans);
+    font-size:14px;
+    padding:13px 16px;
+    border:1px solid var(--steel-light);
+    border-radius:2px;
+    width:260px;
+    color:var(--ink);
+    background:var(--white);
+  }
+  input[type="email"]:focus{
+    outline:none;
+    border-color:var(--gold);
+  }
+  input[type="email"]::placeholder{color:var(--steel);}
+
+  .btn-primary{
+    font-family:var(--sans);
+    font-size:14px;
+    background:var(--ink);
+    color:var(--white);
+    padding:13px 24px;
+    border-radius:2px;
+    border:1px solid var(--ink);
+    cursor:pointer;
+    transition:opacity .15s;
+  }
+  .btn-primary:hover{opacity:0.82;}
+
+  .hp-field{
+    position:absolute;
+    left:-9999px;
+    width:1px;
+    height:1px;
+    opacity:0;
+  }
+
+  .signup-message{
+    font-size:13px;
+    margin-top:12px;
+  }
+  .signup-message.success{color:var(--gold-deep);}
+  .signup-message.error{color:#B3402A;}
+
+  .social-row{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    margin-top:32px;
+    padding-top:24px;
+    border-top:1px solid var(--steel-light);
+  }
+  .social-row a{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:0.04em;
+    color:var(--steel);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .social-row a:hover{
+    color:var(--gold-deep);
+    border-color:var(--gold);
+  }
+
+  footer{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    font-size:11.5px;
+    color:var(--steel);
+  }
+
+  @media (max-width:520px){
+    .card{padding:40px 24px;}
+    .fact{flex-direction:column; gap:4px;}
+    .fact .l-value{text-align:left;}
+    .cta-row{flex-direction:column; align-items:center;}
+    input[type="email"]{width:100%; max-width:280px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="logo-mark">PORTFOLI<span style="color:var(--gold);">.</span></div>
+
+  <div class="eyebrow">AI-native quantitative trading</div>
+
+  <h1>Adaptive gold &amp; silver trading<span class="dots">...</span></h1>
+
+  <p class="mission">
+    We're building adaptive trading infrastructure that evolves as markets change.
+    Portfoli exists to build an AI engine that powers both trending and
+    consolidating strategies — creating consistent profitability while trading
+    with the discipline of an experienced manual trader.
+  </p>
+
+  <div class="hairline"></div>
+
+  <div class="facts">
+    <div class="fact">
+      <span class="l-label">Founded</span>
+      <span class="l-value mono">2025</span>
+    </div>
+    <div class="fact">
+      <span class="l-label">Strategy</span>
+      <span class="l-value">3 working strategies (trend + mean reversion) to cover market conditions</span>
+    </div>
+    <div class="fact">
+      <span class="l-label">What we trade</span>
+      <span class="l-value">Forex — Gold &amp; Silver</span>
+    </div>
+    <div class="fact highlight">
+      <span class="l-label">Status</span>
+      <span class="l-value mono">In private beta</span>
+    </div>
+  </div>
+
+  <p class="closing" style="font-family:var(--display); font-style:italic; font-size:16px; color:var(--gold-deep); margin-bottom:0;">Built to evolve.</p>
+
+  <form class="cta-row" id="signup-form">
+    <input type="hidden" name="plan" value="Landing Page">
+    <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+    <input type="email" name="email" placeholder="you@email.com" required>
+    <button type="submit" class="btn-primary" id="signup-submit">Sign up for updates</button>
+  </form>
+  <p class="signup-message" id="signup-message" hidden></p>
+
+  <div class="social-row">
+    <a href="https://twitter.com/portfoli.tech" target="_blank" rel="noopener">X</a>
+    <a href="https://instagram.com/portfoli.tech" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@portfoli.tech" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://linkedin.com/company/portfoli.tech" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
+
+<footer>&copy; 2026 PORTFOLI. All rights reserved.</footer>
+
+<script>
+(() => {
+  const form = document.getElementById('signup-form');
+  const submitBtn = document.getElementById('signup-submit');
+  const messageEl = document.getElementById('signup-message');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    messageEl.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (!res.ok || !result.ok) {
+        throw new Error(result.error || 'Something went wrong. Please try again.');
+      }
+      messageEl.textContent = 'Thanks for signing up — we will keep you posted.';
+      messageEl.className = 'signup-message success';
+      messageEl.hidden = false;
+      form.reset();
+    } catch (err) {
+      messageEl.textContent = err.message;
+      messageEl.className = 'signup-message error';
+      messageEl.hidden = false;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Sign up for updates';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
