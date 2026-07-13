@@ -153,20 +153,18 @@
     border:1px solid var(--border);
     border-radius:10px;
     overflow:hidden;
-    margin-bottom:40px;
+    margin-bottom:32px;
     text-align:left;
   }
   .fact{
     background:var(--bg-deep);
-    padding:16px 20px;
+    padding:13px 18px;
     display:flex;
     align-items:baseline;
     justify-content:space-between;
     gap:24px;
   }
-  .fact.highlight{
-    background:var(--gold-tint);
-  }
+  .fact.highlight{background:var(--gold-tint);}
   .fact .l-label{
     flex-shrink:0;
     white-space:nowrap;
@@ -176,15 +174,33 @@
     text-transform:uppercase;
     color:var(--steel);
   }
-  .fact .l-value{
+  .fact .l-value{font-size:13.5px; color:var(--ink); text-align:right;}
+  .fact .l-value.mono{font-family:var(--mono); font-size:13px;}
+  .fact .l-value a{color:var(--gold); border-bottom:1px solid var(--gold-deep); padding-bottom:1px; transition:color .15s, border-color .15s;}
+  .fact .l-value a:hover{color:var(--gold); border-color:var(--gold);}
+
+  .signup-intro{
     font-size:14px;
-    color:var(--ink);
-    text-align:right;
+    color:var(--steel);
+    margin-bottom:4px;
   }
-  .fact .l-value.mono{
+  .trust-note{
+    font-size:11.5px;
+    color:var(--steel);
+    opacity:0.75;
+    margin-top:14px;
+  }
+  .learn-more{
+    display:inline-block;
     font-family:var(--mono);
-    font-size:13px;
+    font-size:11.5px;
+    letter-spacing:0.04em;
+    color:var(--steel);
+    border-bottom:1px solid transparent;
+    margin-top:18px;
+    transition:color .15s, border-color .15s;
   }
+  .learn-more:hover{color:var(--gold); border-color:var(--gold);}
 
   .closing{
     font-size:14px;
@@ -277,8 +293,6 @@
 
   @media (max-width:520px){
     .card{padding:40px 24px;}
-    .fact{flex-direction:column; gap:4px;}
-    .fact .l-value{text-align:left;}
     .cta-row{flex-direction:column; align-items:center;}
     input[type="email"]{width:100%; max-width:280px;}
   }
@@ -303,25 +317,17 @@
   <div class="hairline"></div>
 
   <div class="facts">
-    <div class="fact">
-      <span class="l-label">Founded</span>
-      <span class="l-value mono">2025</span>
-    </div>
-    <div class="fact">
-      <span class="l-label">Strategy</span>
-      <span class="l-value">BDT (momentum), Morpheus (trend), CMR (consolidation)</span>
-    </div>
-    <div class="fact">
-      <span class="l-label">What we trade</span>
-      <span class="l-value">Nasdaq, Dow Jones, XAUUSD, XAGUSD</span>
-    </div>
     <div class="fact highlight">
       <span class="l-label">Status</span>
       <span class="l-value mono">In private beta</span>
     </div>
+    <div class="fact">
+      <span class="l-label">Track record</span>
+      <span class="l-value"><a href="https://www.myfxbook.com/portfolio/portfoli-1/12037385" target="_blank" rel="noopener">Live on Myfxbook →</a></span>
+    </div>
   </div>
 
-  <p class="closing" style="font-style:italic; font-size:16px; color:var(--gold); margin-bottom:0;">Built to evolve.</p>
+  <p class="signup-intro">Be first to know when private beta access opens.</p>
 
   <form class="cta-row" id="signup-form">
     <input type="hidden" name="plan" value="Landing Page">
@@ -330,6 +336,9 @@
     <button type="submit" class="btn-primary" id="signup-submit">Sign up for updates</button>
   </form>
   <p class="signup-message" id="signup-message" hidden></p>
+  <p class="trust-note">We'll never share your email. Unsubscribe anytime.</p>
+
+  <p class="closing" style="font-style:italic; font-size:16px; color:var(--gold); margin-top:32px;">Built to evolve.</p>
 
   <div class="social-row">
     <a href="https://twitter.com/portfoli.tech" target="_blank" rel="noopener">X</a>
@@ -337,6 +346,8 @@
     <a href="https://tiktok.com/@portfolitech" target="_blank" rel="noopener">TikTok</a>
     <a href="https://linkedin.com/company/portfoli.tech" target="_blank" rel="noopener">LinkedIn</a>
   </div>
+
+  <a class="learn-more" href="https://tituscheng1536.github.io/portfoli-site/" target="_blank" rel="noopener">Learn more about Portfoli →</a>
 </div>
 
 <footer>&copy; 2026 PORTFOLI. All rights reserved.</footer>
