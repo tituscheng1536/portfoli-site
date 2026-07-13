@@ -19,20 +19,24 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,450;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --white:#FFFFFF;
-    --paper:#F6F5F0;
-    --ink:#17181A;
-    --steel:#83878C;
-    --steel-light:#D8D9D6;
-    --steel-lighter:#EDEDEB;
-    --gold:#AC8A45;
-    --gold-deep:#8A6B2E;
-    --gold-tint:#F2EAD6;
+    --bg:#181A22;
+    --bg-deep:#12141B;
+    --surface:rgba(255,255,255,0.055);
+    --border:rgba(255,255,255,0.11);
+    --border-strong:rgba(255,255,255,0.20);
+    --ink:#F2F3F5;
+    --steel:#9FA6B2;
+    --steel-light:rgba(255,255,255,0.14);
+    --gold:#E8B854;
+    --gold-deep:#C99A3E;
+    --gold-tint:rgba(232,184,84,0.14);
+    --gold-glow:rgba(232,184,84,0.35);
+    --violet:#8B85F5;
+    --teal:#5FD4C4;
     --sans: 'Inter', sans-serif;
-    --display: 'Fraunces', serif;
     --mono: 'IBM Plex Mono', monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -40,7 +44,7 @@
   body{
     font-family:var(--sans);
     color:var(--ink);
-    background:var(--white);
+    background:var(--bg);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
     display:flex;
@@ -53,16 +57,17 @@
     position:relative;
   }
 
-  /* subtle background texture */
+  /* subtle background texture + color glow */
   body::before{
     content:"";
     position:absolute;
     top:0; left:0; right:0; bottom:0;
     background-image:
-      linear-gradient(var(--steel-lighter) 1px, transparent 1px),
-      linear-gradient(90deg, var(--steel-lighter) 1px, transparent 1px);
-    background-size:64px 64px;
-    opacity:0.4;
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px),
+      radial-gradient(ellipse at 30% 20%, rgba(232,184,84,0.14), transparent 55%),
+      radial-gradient(ellipse at 75% 70%, rgba(139,133,245,0.12), transparent 55%);
+    background-size:64px 64px, 64px 64px, 100% 100%, 100% 100%;
     mask-image:radial-gradient(ellipse at center, black 0%, transparent 70%);
     -webkit-mask-image:radial-gradient(ellipse at center, black 0%, transparent 70%);
   }
@@ -73,10 +78,13 @@
     max-width:620px;
     width:100%;
     text-align:center;
-    background:var(--paper);
-    border:1px solid var(--steel-light);
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
     padding:56px 48px;
-    box-shadow:0 32px 64px -32px rgba(23,24,26,0.16);
+    box-shadow:0 32px 64px -32px rgba(0,0,0,0.6);
   }
 
   .logo-mark{
@@ -93,7 +101,7 @@
     font-size:11.5px;
     letter-spacing:0.16em;
     text-transform:uppercase;
-    color:var(--gold-deep);
+    color:var(--gold);
     margin-bottom:24px;
   }
 
@@ -109,8 +117,13 @@
   h1 .dots{
     display:inline-block;
     color:var(--gold);
-    animation:blink 1.6s infinite;
   }
+  h1 .dots span{
+    display:inline-block;
+    animation:blink 2.4s infinite;
+  }
+  h1 .dots span:nth-child(2){animation-delay:0.3s;}
+  h1 .dots span:nth-child(3){animation-delay:0.6s;}
   @keyframes blink{
     0%,20%{opacity:1;}
     50%{opacity:0.25;}
@@ -136,13 +149,15 @@
     display:flex;
     flex-direction:column;
     gap:1px;
-    background:var(--steel-light);
-    border:1px solid var(--steel-light);
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
     margin-bottom:40px;
     text-align:left;
   }
   .fact{
-    background:var(--white);
+    background:var(--bg-deep);
     padding:16px 20px;
     display:flex;
     align-items:baseline;
@@ -188,30 +203,32 @@
     font-family:var(--sans);
     font-size:14px;
     padding:13px 16px;
-    border:1px solid var(--steel-light);
-    border-radius:2px;
+    border:1px solid var(--border-strong);
+    border-radius:10px;
     width:260px;
     color:var(--ink);
-    background:var(--white);
+    background:rgba(255,255,255,0.04);
   }
   input[type="email"]:focus{
     outline:none;
     border-color:var(--gold);
+    box-shadow:0 0 0 3px var(--gold-tint);
   }
   input[type="email"]::placeholder{color:var(--steel);}
 
   .btn-primary{
     font-family:var(--sans);
+    font-weight:600;
     font-size:14px;
-    background:var(--ink);
-    color:var(--white);
+    background:linear-gradient(135deg, var(--gold), var(--gold-deep));
+    color:#1A1305;
     padding:13px 24px;
-    border-radius:2px;
-    border:1px solid var(--ink);
+    border-radius:10px;
+    border:1px solid var(--gold);
     cursor:pointer;
-    transition:opacity .15s;
+    transition:box-shadow .2s, transform .15s;
   }
-  .btn-primary:hover{opacity:0.82;}
+  .btn-primary:hover{box-shadow:0 0 24px var(--gold-glow); transform:translateY(-1px);}
 
   .hp-field{
     position:absolute;
@@ -225,8 +242,8 @@
     font-size:13px;
     margin-top:12px;
   }
-  .signup-message.success{color:var(--gold-deep);}
-  .signup-message.error{color:#B3402A;}
+  .signup-message.success{color:var(--gold);}
+  .signup-message.error{color:#FF8A73;}
 
   .social-row{
     display:flex;
@@ -234,7 +251,7 @@
     justify-content:center;
     margin-top:32px;
     padding-top:24px;
-    border-top:1px solid var(--steel-light);
+    border-top:1px solid var(--border);
   }
   .social-row a{
     font-family:var(--mono);
@@ -246,7 +263,7 @@
     transition:color .15s, border-color .15s;
   }
   .social-row a:hover{
-    color:var(--gold-deep);
+    color:var(--gold);
     border-color:var(--gold);
   }
 
@@ -274,10 +291,10 @@
 
   <div class="eyebrow">AI-native quantitative trading</div>
 
-  <h1>Adaptive forex and futures trading<span class="dots">...</span></h1>
+  <h1>Adaptive trading for forex and futures<span class="dots"><span>.</span><span>.</span><span>.</span></span></h1>
 
   <p class="mission">
-    We're building adaptive trading infrastructure that evolves as markets change.
+    We're building trading infrastructure that evolves as markets change.
     Most strategies only work in one kind of market — they win in trends and bleed
     in chop, or the reverse. Portfoli's AI engine adapts to both, trading every
     condition with the consistency only a machine can do.
@@ -304,7 +321,7 @@
     </div>
   </div>
 
-  <p class="closing" style="font-family:var(--display); font-style:italic; font-size:16px; color:var(--gold-deep); margin-bottom:0;">Built to evolve.</p>
+  <p class="closing" style="font-style:italic; font-size:16px; color:var(--gold); margin-bottom:0;">Built to evolve.</p>
 
   <form class="cta-row" id="signup-form">
     <input type="hidden" name="plan" value="Landing Page">
