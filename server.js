@@ -9,6 +9,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'landingpage', 'index.html'));
+});
+
 app.use(express.static(__dirname, { index: 'index.html' }));
 
 function isValidEmail(email) {
