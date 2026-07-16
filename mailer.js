@@ -1,37 +1,28 @@
-const nodemailer = require('nodemailer');
+const RESEND_API_URL = 'https://api.resend.com/emails';
 
-let transporter;
-let transporterInitialized = false;
-
-function getTransporter() {
-  if (transporterInitialized) return transporter;
-  transporterInitialized = true;
-
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    transporter = null;
-    return transporter;
-  }
-
-  transporter = nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT) || 587,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
-  return transporter;
-}
-
-// No-op unless SMTP_* and NOTIFY_EMAIL are configured in .env.
+// Uses Resend's HTTP API (not SMTP) because Render's free tier blocks
+// outbound traffic on SMTP ports 25/465/587.
 async function sendNotification(lead) {
-  const t = getTransporter();
-  if (!t || !process.env.NOTIFY_EMAIL) return;
+  const { RESEND_API_KEY, NOTIFY_EMAIL } = process.env;
+  if (!RESEND_API_KEY || !NOTIFY_EMAIL) return;
 
-  await t.sendMail({
-    from: process.env.SMTP_USER,
-    to: process.env.NOTIFY_EMAIL,
-    subject: `New Portfoli lead: ${lead.email}`,
-    text: JSON.stringify(lead, null, 2),
+  const res = await fetch(RESEND_API_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: process.env.RESEND_FROM || 'onboarding@resend.dev',
+      to: NOTIFY_EMAIL,
+      subject: `New Portfoli lead: ${lead.email}`,
+      text: JSON.stringify(lead, null, 2),
+    }),
   });
+
+  if (!res.ok) {
+    throw new Error(`Resend API error ${res.status}: ${await res.text()}`);
+  }
 }
 
 module.exports = { sendNotification };

@@ -8,13 +8,7 @@ services:
     envVars:
       - key: ADMIN_TOKEN
         sync: false
-      - key: SMTP_HOST
-        sync: false
-      - key: SMTP_PORT
-        value: 587
-      - key: SMTP_USER
-        sync: false
-      - key: SMTP_PASS
+      - key: RESEND_API_KEY
         sync: false
       - key: NOTIFY_EMAIL
         sync: false
