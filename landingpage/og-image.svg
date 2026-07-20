@@ -1,0 +1,51 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="goldGlow" cx="18%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="#E8B854" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#E8B854" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="violetGlow" cx="82%" cy="88%" r="55%">
+      <stop offset="0%" stop-color="#8B85F5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#8B85F5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pillFill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E8B854"/>
+      <stop offset="100%" stop-color="#C99A3E"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#12141B"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#goldGlow)"/>
+  <rect width="1200" height="630" fill="url(#violetGlow)"/>
+
+  <!-- outer frame -->
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#FFFFFF" stroke-opacity="0.09" stroke-width="2"/>
+
+  <!-- wordmark -->
+  <text x="80" y="118" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="600" letter-spacing="3" fill="#F2F3F5">PORTFOLI<tspan fill="#E8B854">.</tspan></text>
+
+  <!-- eyebrow -->
+  <text x="80" y="172" font-family="Consolas, monospace" font-size="18" letter-spacing="3" fill="#E8B854">AI-NATIVE QUANTITATIVE TRADING</text>
+
+  <!-- headline -->
+  <text x="78" y="278" font-family="Segoe UI, Arial, sans-serif" font-size="64" font-weight="500" letter-spacing="-1" fill="#F2F3F5">Adaptive trading for</text>
+  <text x="78" y="356" font-family="Segoe UI, Arial, sans-serif" font-size="64" font-weight="500" letter-spacing="-1" fill="#F2F3F5">forex and futures</text>
+
+  <!-- hairline -->
+  <rect x="80" y="404" width="64" height="2" fill="#E8B854"/>
+
+  <!-- market tickers -->
+  <text x="80" y="452" font-family="Consolas, monospace" font-size="19" letter-spacing="1" fill="#9FA6B2">GC &#183; SI &#183; XAUUSD &#183; XAGUSD</text>
+
+  <!-- status pill -->
+  <rect x="80" y="500" width="272" height="56" rx="10" fill="#E8B854" fill-opacity="0.12" stroke="#E8B854" stroke-opacity="0.5" stroke-width="1.5"/>
+  <circle cx="112" cy="528" r="6" fill="#E8B854"/>
+  <text x="132" y="534" font-family="Consolas, monospace" font-size="18" letter-spacing="1.5" fill="#E8B854">IN PRIVATE BETA</text>
+
+  <!-- bottom-right tag -->
+  <text x="1120" y="556" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-style="italic" fill="#E8B854" text-anchor="end">Built to evolve.</text>
+</svg>
